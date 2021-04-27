@@ -347,6 +347,16 @@ function shortsearch_install()
                                     <input type="text" name="reservationname" id="reservationname" placeholder="Spitzname" class="textbox" style="width:90%">
                                     </td>
                                 </tr>
+				<tr>
+                                    <td>
+                                        <div class="tcat">Dein Nachricht</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center">
+                                    <input type="textarea" name="reservationtext" id="reservationtext" placeholder="Hinterlasse doch deine Kontaktdaten wie Discord oder ähnliches" class="textbox" style="width:90%">
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td colspan="2" align="center">
                                         <input type="submit" name="sid" value="Kurzgesuch reservieren" id="sid" class="button">
