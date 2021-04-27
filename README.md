@@ -39,7 +39,7 @@ Veränderte Tabellen:
 # Template Änderungen - neue Variablen
 - header - {$new_shortsearch}
 - modcp_nav_users - {$nav_shortsearch}
-- member_profile - {$shortsearch_profile
+- member_profile - {$shortsearch_profile}
 
 # ACP-Einstellungen - Kurzgesuche
 - Erlaubte Gruppen
