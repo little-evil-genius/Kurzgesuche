@@ -59,7 +59,26 @@ Veränderte Tabellen:
 - https://euerforum.de/modcp.php?action=shortsearch
 
 # Demo
-<center><img src="https://snipboard.io/0haIBD.jpg" /></center>
+  Hauptseite der Kurzgesuche
+  <img src="https://www.bilder-hochladen.net/files/big/m4bn-76-fc96.png" />
+  
+  Maske beim Hinzufügen
+  <img src="https://www.bilder-hochladen.net/files/big/m4bn-77-d5de.png" />
+  
+  Übersicht aller eigenen Kurzgesuche
+  <img src="https://www.bilder-hochladen.net/files/big/m4bn-7a-76ad.png" />
+  
+  Kurzgesuche im Profil
+  <img src="https://www.bilder-hochladen.net/files/m4bn-7b-7b00.png" />
+  
+  Mod-CP
+  <img src="https://www.bilder-hochladen.net/files/m4bn-79-d8f5.png" />
+  
+  Alert auf dem Index
+  <img src="https://www.bilder-hochladen.net/files/m4bn-78-3c3a.png" />
+  
+  Popfenster für die Gästereservierunge
+  <img src="https://www.bilder-hochladen.net/files/m4bn-7c-0965.png" />
 
 # Danksagung
 Ein Dank geht an Katja (risuena) und Alex (Ales), welche mir bei Problem immer wieder geholfen haben. 
