@@ -329,7 +329,7 @@ function shortsearch_install()
         // GÄSTE RESERVIERUNG
         $insert_array = array(
             'title'		=> 'shortsearch_guest_reservation',
-            'template'	=> $db->escape_string('<a href="#popinfo$sid" original-title=\"Reservieren\"><i class=\"fas fa-user-shield\" style=\"float:none\"></a>
+            'template'	=> $db->escape_string('<a href="#popinfo$sid" original-title="Reservieren"><i class="fas fa-user-shield" style="float:none"></i></a>
 
             <div id="popinfo$sid" class="searchpop">
                 <div class="pop">
