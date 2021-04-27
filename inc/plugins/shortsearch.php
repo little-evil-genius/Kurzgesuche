@@ -34,19 +34,20 @@ function shortsearch_install()
     // Datenbank-Tabelle erstellen
 	$db->query("CREATE TABLE ".TABLE_PREFIX."shortsearch(
         `sid` int(10) NOT NULL AUTO_INCREMENT,
-		`type` VARCHAR(255) NOT NULL,
-		`searchtitle` VARCHAR(2500) COLLATE utf8_general_ci NOT NULL,
-		`searchgender` VARCHAR(255) NOT NULL,
+	`type` VARCHAR(255) NOT NULL,
+	`searchtitle` VARCHAR(2500) COLLATE utf8_general_ci NOT NULL,
+	`searchgender` VARCHAR(255) NOT NULL,
         `searchage` VARCHAR(255) COLLATE utf8_general_ci NOT NULL,
         `searchrelationstatus` VARCHAR(255) NOT NULL,
         `searchjob` VARCHAR(500) COLLATE utf8_general_ci NOT NULL,
         `searchrelation` VARCHAR(500) COLLATE utf8_general_ci NOT NULL,
         `searchtext` VARCHAR(2500) COLLATE utf8_general_ci NOT NULL,
         `searchavatar` VARCHAR(500) COLLATE utf8_general_ci NOT NULL,
-		`searchstatus` VARCHAR(255) NOT NULL,
+	`searchstatus` VARCHAR(255) NOT NULL,
         `wantedby` int(11) NOT NULL,
-		`rid` int(11) NOT NULL,
-		`reservationname` VARCHAR(255) NOT NULL,
+	`rid` int(11) NOT NULL,
+	`reservationname` VARCHAR(255) NOT NULL,
+	`reservationtext` VARCHAR(500) NOT NULL,
         PRIMARY KEY(`sid`),
         KEY `sid` (`sid`)
         )
@@ -1414,21 +1415,21 @@ function shortsearch_misc() {
     if($reservation) {
         $reservation_guest = array(
             "reservationname" => $db->escape_string($mybb->get_input('reservationname')),
+            "reservationtext" => $db->escape_string($mybb->get_input('reservationtext')),
 			"searchstatus" => "1",
         );
 
-        $res_guest_query = $db->query("SELECT wantedby
-            from ".TABLE_PREFIX."shortsearch
+        $res_guest_query = $db->query("SELECT * FROM ".TABLE_PREFIX."shortsearch
            WHERE sid = '".$reservation."'
             ");
 
         $privat = $db->fetch_array($res_guest_query);
-        $title = $privat['searchtitle'];
+        $reservationtext =  $db->escape_string($mybb->get_input('reservationtext'));
         $uid = $privat['wantedby'];
 
         $pm_change = array(
             "subject" => "Dein Kurzgesuch wurde von einem Gast reserviert!",
-            "message" => "{$lang->shortsearch_pm_guest}",
+            "message" => "Der Gast hat dir eine Nachricht hinterlassen: ".$reservationtext." ",
             //to: wer muss die anfrage bestätigen
             "fromid" => $teamuid,
             //from: wer hat die anfrage gestellt
@@ -1499,6 +1500,7 @@ function shortsearch_misc() {
                 "searchstatus" => "0",
                 "rid" => (int)$mybb->user['rid'],
                 "reservationname" => $db->escape_string($mybb->get_input('reservationname')),
+                "reservationtext" => $db->escape_string($mybb->get_input('reservationtext')),
             );
             $db->insert_query("shortsearch", $new_shortsearch);
             $db->query("UPDATE ".TABLE_PREFIX."users SET shortsearch_new ='0'");
