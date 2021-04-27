@@ -173,13 +173,13 @@ function shortsearch_install()
             <form id="search_filter" method="post">
             <input type="hidden" name="action" value="shortsearch" />
         <table><td class="smalltext">Filtern nach:</td>
+        <td><select name="filter_gender">
+    <option value="%" selected>Beide Geschlechter</option>
+    {$gender_select}
+    </select></td>
     <td><select name="filter_relation">
         <option value="%" selected>Zeige alle Beziehungsstatus an</option>
         {$relation_select}
-        </select></td>
-            <td><select name="filter_gender">
-        <option value="%" selected>Beide Geschlechter</option>
-        {$gender_select}
         </select></td>
     <td  align="center">
 <input type="submit" name="search_filter" value="Filtern" id="submit" class="button"></td></tr>
@@ -264,7 +264,7 @@ function shortsearch_install()
             <div class="wantedby">gesucht von {$charaname}</div>  
             <div style="display: flex;">	
                 <div class="fact"><i class="fas fa-birthday-cake"></i> {$age}</div>		
-                <div class="fact"><i class="fas fa-venus-mars"></i> {$gender}</div>	  	
+                <div class="fact"><i class="fas fa-venus-mars"></i> {$gender}</div>		  	
             </div>	
             <div class="desc">{$text}</div>	
             <div style="display: flex;">			
@@ -310,10 +310,10 @@ function shortsearch_install()
             <div class="wantedby">gesucht von {$charaname} {$spielername}</div>    
             <div style="display: flex;">	
                 <div class="fact"><i class="fas fa-birthday-cake"></i> {$age}</div>		
-                <div class="fact"><i class="fas fa-venus-mars"></i> {$gender}</div>		
+                <div class="fact"><i class="fas fa-venus-mars"></i> {$gender}</div>	 	
             </div>	
             <div class="desc">{$text}</div>	
-            <div style="display: flex;">			
+            <div style="display: flex;">		
                 <div class="fact"><i class="fas fa-briefcase"></i> {$job}</div>		
                 <div class="fact"><i class="fas fa-heart"></i> {$relationstatus}</div>  	
             </div>    
@@ -328,7 +328,7 @@ function shortsearch_install()
         // GÄSTE RESERVIERUNG
         $insert_array = array(
             'title'		=> 'shortsearch_guest_reservation',
-            'template'	=> $db->escape_string('<a href="#popinfo$sid">Reservieren</a>
+            'template'	=> $db->escape_string('<a href="#popinfo$sid"><i class=\"fas fa-user-shield\" style=\"float:none\"></a>
 
             <div id="popinfo$sid" class="searchpop">
                 <div class="pop">
@@ -650,7 +650,7 @@ function shortsearch_install()
             'title'		=> 'shortsearch_modcp_nav',
             'template'	=> $db->escape_string('<tr>
             <td class="trow1 smalltext">
-                <a href="modcp.php?action=shortsearch" class="modcp_nav_item modcp_shortsearch">Kurzgesuche verwalten</a>
+                <a href="modcp.php?action=shortsearch" class="modcp_nav_item modcp_jobliste">Kurzgesuche verwalten</a>
             </td>
         </tr>'),
             'sid'		=> '-1',
@@ -1118,6 +1118,13 @@ $plugins->add_hook("build_friendly_wol_location_end", "shortsearch_online_locati
 
 function shortsearch_online_activity($user_activity) {
 global $parameters;
+
+    $split_loc = explode(".php", $user_activity['location']);
+    if($split_loc[0] == $user['location']) {
+        $filename = '';
+    } else {
+        $filename = my_substr($split_loc[0], -my_strpos(strrev($split_loc[0]), "/"));
+    }
     
     switch ($filename) {
         case 'misc':
@@ -1247,7 +1254,6 @@ function shortsearch_misc() {
         foreach ($type as $typ) {
             $shortsearch = "";
             eval("\$shortsearch_none = \"".$templates->get("shortsearch_none")."\";");
-
             // ABFRAGE DER DATENBANKEN - SHORTSEARCH & USER & USERFIELDS
             $query = $db->query("SELECT * FROM ".TABLE_PREFIX."shortsearch
             LEFT JOIN ".TABLE_PREFIX."users
@@ -1345,7 +1351,7 @@ function shortsearch_misc() {
 
                 // RESERVIERUNG - USER
                 if ($search['searchstatus'] == "0" && $mybb->user['uid'] != '0' && $mybb->user['uid'] != $search['wantedby']) {
-                    $reservations = "<a href='misc.php?action=shortsearch&resuser={$search['sid']}'>Reservieren</a>";
+                    $reservations = "<a href='misc.php?action=shortsearch&resuser={$search['sid']}'><i class=\"fas fa-user-shield\" style=\"float:none\"></i></a>";
                 } 
                 elseif ($search['searchstatus'] == "0" && $mybb->user['uid'] == '0' && $mybb->user['uid'] != $search['wantedby']) {
                     eval("\$reservations = \"" . $templates->get("shortsearch_guest_reservation") . "\";");
@@ -1537,11 +1543,26 @@ if ($mybb->get_input ('action') == 'shortsearch_read') {
       add_breadcrumb ($lang->shortsearch, "misc.php?action=shortsearch");
      add_breadcrumb($lang->shortsearch_own, "misc.php?action=shortsearch_own");
 
+     // ACCOUNTSWITCHER 
      //welcher user ist online
-     $this_user = intval($mybb->user['uid']);
+        $this_user = intval($mybb->user['uid']);
 
-     //für den fall nicht mit hauptaccount online
-     $as_uid = intval($mybb->user['as_uid']);
+//für den fall nicht mit hauptaccount online
+        $as_uid = intval($mybb->user['as_uid']);
+
+      // suche alle angehangenen accounts
+  // as uid = 0 wenn hauptaccount oder keiner angehangen
+  $charas = array();
+  if ($as_uid == 0) {
+    $get_all_users = $db->query("SELECT uid,username FROM " . TABLE_PREFIX . "users WHERE (as_uid = $this_user) OR (uid = $this_user) ORDER BY username");
+  } else if ($as_uid != 0) {
+    //id des users holen wo alle angehangen sind 
+    $get_all_users = $db->query("SELECT uid,username FROM " . TABLE_PREFIX . "users WHERE (as_uid = $as_uid) OR (uid = $this_user) OR (uid = $as_uid) ORDER BY username");
+  }
+  while ($users = $db->fetch_array($get_all_users)) {
+    $uid = $users['uid'];
+    $charas[$uid] = $users['username'];
+  }
 
      // KATEGORIEN AUS DEN EINSTELLUNGEN ZIEHEN UND AUFSPALTEN
      $shortsearch_cat_setting = $mybb->settings['shortsearch_category'];
@@ -1551,28 +1572,20 @@ if ($mybb->get_input ('action') == 'shortsearch_read') {
          $shortsearch = "";
          eval("\$shortsearch_none = \"".$templates->get("shortsearch_none")."\";");
 
-         if ($as_uid == 0) {
+         foreach ($charas as $uid => $charname) {
             $query = $db->query("SELECT * FROM ".TABLE_PREFIX."shortsearch
             LEFT JOIN ".TABLE_PREFIX."users
             ON ".TABLE_PREFIX."users.uid = ".TABLE_PREFIX."shortsearch.wantedby
             LEFT JOIN ".TABLE_PREFIX."userfields
             ON ".TABLE_PREFIX."userfields.ufid = ".TABLE_PREFIX."shortsearch.wantedby
-            WHERE (".TABLE_PREFIX."users.as_uid = $this_user) OR (".TABLE_PREFIX."users.uid = $this_user)
+            WHERE wantedby = {$uid}
             AND type = '$typ'
             ORDER by searchtitle ASC");
-        }elseif($as_uid != 0){
-            $query = $db->query("SELECT * FROM ".TABLE_PREFIX."shortsearch
-            LEFT JOIN ".TABLE_PREFIX."users
-            ON ".TABLE_PREFIX."users.uid = ".TABLE_PREFIX."shortsearch.wantedby
-            LEFT JOIN ".TABLE_PREFIX."userfields
-            ON ".TABLE_PREFIX."userfields.ufid = ".TABLE_PREFIX."shortsearch.wantedby
-            WHERE (".TABLE_PREFIX."users.as_uid = $as_uid) OR (".TABLE_PREFIX."users.uid = $this_user) OR (".TABLE_PREFIX."users.uid = $as_uid)
-            AND type = '$typ'
-            ORDER by searchtitle ASC");
-        }
+        
+        
 
          while ($search = $db->fetch_array ($query)) {
-             
+            $shortsearch = "";    
          $shortsearch_none = "";
 
              // LEER LAUFEN LASSEN 
@@ -1587,10 +1600,12 @@ if ($mybb->get_input ('action') == 'shortsearch_read') {
              $avatar = "";
              $status = "";
              $wantedby = "";
+             $rid = "";
 
              // MIT INFORMATIONEN FÜLLEN
              $avatar = $search['searchavatar'];
              $sid = $search['sid'];
+             $rid = $search['rid'];
              $title = $search['searchtitle'];
              $gender = $search['searchgender'];
              $age = $search['searchage'];
@@ -1619,10 +1634,10 @@ if ($mybb->get_input ('action') == 'shortsearch_read') {
                 ON ".TABLE_PREFIX."userfields.ufid = '$rid'
                 WHERE uid = '$rid'
                 ");
-           
-               $user = $db->fetch_array($reservations_user);
-       
-               // SPIELERNAME
+            
+                $user = $db->fetch_array($reservations_user);
+
+                // SPIELERNAME
                if ($user[$playerfid] == "") {
                 $resname = format_name($user['username'], $user['usergroup'], $user['displaygroup']);
                 $spitzname = build_profile_link($resname, $user['uid']); 
@@ -1650,6 +1665,7 @@ if ($mybb->get_input ('action') == 'shortsearch_read') {
 
              eval("\$shortsearch .= \"" . $templates->get("shortsearch_own_bit") . "\";");
          }
+        }
 
          eval("\$shortsearch_category .= \"" . $templates->get ("shortsearch_category") . "\";");
      }
