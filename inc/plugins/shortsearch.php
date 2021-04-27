@@ -264,12 +264,12 @@ function shortsearch_install()
             <div class="wantedby">gesucht von {$charaname}</div>  
             <div style="display: flex;">	
                 <div class="fact"><i class="fas fa-birthday-cake"></i> {$age}</div>		
-                <div class="fact"><i class="fas fa-venus-mars"></i> {$gender}</div>		  	
+                <div class="fact"><i class="fas fa-venus-mars"></i> {$gender}</div>		 	
             </div>	
             <div class="desc">{$text}</div>	
-            <div style="display: flex;">			
-                <div class="fact"><i class="fas fa-briefcase"></i> {$job}</div>		
-                <div class="fact"><i class="fas fa-heart"></i> {$relationstatus}</div>  	
+            <div style="display: flex;">	
+                <div class="fact"><i class="fas fa-money-bill-alt"></i> {$social}</div>		
+                <div class="fact"><i class="fas fa-briefcase"></i> {$job}</div>		  	
             </div>    
             <div class="avatar"><i class="fas fa-camera-retro"></i> {$avatar}</div>
             <div class="status">{$statusicon}{$status}</div>
@@ -310,10 +310,10 @@ function shortsearch_install()
             <div class="wantedby">gesucht von {$charaname} {$spielername}</div>    
             <div style="display: flex;">	
                 <div class="fact"><i class="fas fa-birthday-cake"></i> {$age}</div>		
-                <div class="fact"><i class="fas fa-venus-mars"></i> {$gender}</div>	 	
+                <div class="fact"><i class="fas fa-venus-mars"></i> {$gender}</div>	  	
             </div>	
             <div class="desc">{$text}</div>	
-            <div style="display: flex;">		
+            <div style="display: flex;">			
                 <div class="fact"><i class="fas fa-briefcase"></i> {$job}</div>		
                 <div class="fact"><i class="fas fa-heart"></i> {$relationstatus}</div>  	
             </div>    
@@ -1585,7 +1585,6 @@ if ($mybb->get_input ('action') == 'shortsearch_read') {
         
 
          while ($search = $db->fetch_array ($query)) {
-            $shortsearch = "";    
          $shortsearch_none = "";
 
              // LEER LAUFEN LASSEN 
@@ -1819,7 +1818,7 @@ function shortsearch_member_profile_end(){
     $member_uid = $mybb->get_input('uid', MyBB::INPUT_INT);
 
     // NUR WENN DIE EINSTELLUNG AUF JA STEHT
-    if($setting_profile == 0){
+    if($setting_profile == 1){
         
         // ABFRAGE DER DATENBANKEN - SHORTSEARCH & USER & USERFIELDS
         $query = $db->query("SELECT * FROM ".TABLE_PREFIX."shortsearch 
@@ -1839,9 +1838,11 @@ function shortsearch_member_profile_end(){
                     $avatar = "";
                     $status = "";
                     $reservationname = "";
+                    $rid = "";
        
                     // MIT INFORMATIONEN FÜLLEN
                     $sid = $search['sid'];
+                    $rid = $search['rid'];
                     $type = $search['type'];
                     $title = $search['searchtitle'];
                     $gender = $search['searchgender'];
@@ -1862,22 +1863,21 @@ function shortsearch_member_profile_end(){
                       elseif ($search['searchstatus'] == "1" && $search['rid'] != "0") {
 
        // DATEN ZIEHEN VON DEM USER, WELCHER RESERVIERT HAT
-                      $reservations_user = $db->query("SELECT * FROM ".TABLE_PREFIX."shortsearch
-                      LEFT JOIN ".TABLE_PREFIX."users
-                      ON ".TABLE_PREFIX."users.uid = ".TABLE_PREFIX."shortsearch.rid
-                      LEFT JOIN ".TABLE_PREFIX."userfields
-                      ON ".TABLE_PREFIX."userfields.ufid = ".TABLE_PREFIX."shortsearch.rid");
-                  
-                      $user = $db->fetch_array($reservations_user);
+                $reservations_user = $db->query("SELECT * FROM ".TABLE_PREFIX."users
+                LEFT JOIN ".TABLE_PREFIX."userfields
+                ON ".TABLE_PREFIX."userfields.ufid = '$rid'
+                WHERE uid = '$rid'
+                ");
+            
+                $user = $db->fetch_array($reservations_user);
 
-              // SPIELERNAME
-              if ($user[$playerfid] == "") {
+                // SPIELERNAME
+               if ($user[$playerfid] == "") {
                 $resname = format_name($user['username'], $user['usergroup'], $user['displaygroup']);
                 $spitzname = build_profile_link($resname, $user['uid']); 
             } else {
                 $spitzname = build_profile_link($user[$playerfid], $user['uid']);
             }
-                      $spitzname = build_profile_link($user[$playerfid], $user['uid']);
        
                        $status = "Das Gesuch ist <b>reserviert</b> für {$spitzname}";
                        $statusicon = "<i class=\"fas fa-user-shield\"></i>";
