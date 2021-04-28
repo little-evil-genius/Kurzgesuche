@@ -84,3 +84,7 @@ Veränderte Tabellen:
 # Danksagung
 Ein Dank geht an Katja (risuena) und Alex (Ales), welche mir bei Problem immer wieder geholfen haben. 
 Und ein Dank geht an Doro (Sternentänzerin) und Celine (SG-Name), welche das Plugin getestet haben auf ihre letzten Fehlerchen.
+
+# Getestet unter
+- MyBB Version	1.8.26, 1.8.25, 1.8.23
+- PHP Version	7.4.16, 7.4.1, 7.3.26
