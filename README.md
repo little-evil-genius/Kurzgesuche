@@ -82,8 +82,8 @@ Veränderte Tabellen:
   <img src="https://www.bilder-hochladen.net/files/m4bn-7d-66c8.png" />
 
 # Danksagung
-Ein Dank geht an Katja (risuena) und Alex (Ales), welche mir bei Problem immer wieder geholfen haben. 
-Und ein Dank geht an Doro (Sternentänzerin) und Celine (SG-Name), welche das Plugin getestet haben auf ihre letzten Fehlerchen.
+Ein Dank geht an Katja (risuena) und Alex (Ales), welche mir bei Problem immer wieder geholfen haben. Auch ein Dank Sophie (aheartforspinach), welche über den Code nochmal geschaut hat und mir Tipps gegeben hat, wie man einiges besser löschen könnte.
+Und ein Dank geht an Doro (Sternentänzerin), Katja und Celine (SG-Name), welche das Plugin getestet haben auf ihre letzten Fehlerchen.
 
 # Getestet unter
 - MyBB Version	1.8.26, 1.8.25, 1.8.23
