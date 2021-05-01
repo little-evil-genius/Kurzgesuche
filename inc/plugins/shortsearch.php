@@ -1856,7 +1856,7 @@ function shortsearch_member_profile_end(){
                     $sid = $search['sid'];
                     $rid = $search['rid'];
                     $type = $search['type'];
-                    $title = $search['searchtitle'];
+                    $title = "<a href=\"misc.php?action=shortsearch\">{$search['searchtitle']}</a>";
                     $gender = $search['searchgender'];
                     $age = $search['searchage'];
                     $relationstatus = $search['searchrelationstatus'];
