@@ -1932,7 +1932,7 @@ function shortsearch_modcp() {
     $playerfid = "fid".$playerfid;
 
     if($mybb->get_input('action') == 'shortsearch') {
-        $lang->load('activity');
+        $lang->load('shortsearch');
         // Add a breadcrumb
         add_breadcrumb("Alle Kurzgesuche", "modcp.php?action=shortsearch");
 
