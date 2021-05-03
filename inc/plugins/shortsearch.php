@@ -1460,6 +1460,7 @@ function shortsearch_misc() {
         eval("\$shortsearch_filter .= \"" . $templates->get("shortsearch_filter") . "\";");
         eval("\$page = \"".$templates->get("shortsearch")."\";");
         output_page($page);
+	      die();
 }
 
     // KURZGESUCH HINZUFÜGEN
@@ -1519,6 +1520,7 @@ function shortsearch_misc() {
         
     eval("\$page = \"".$templates->get("shortsearch_add")."\";");
     output_page($page);
+	      die();
     }
     else {
         error_no_permission();
@@ -1714,6 +1716,7 @@ if ($mybb->get_input ('action') == 'shortsearch_read') {
 
      eval("\$page = \"".$templates->get("shortsearch")."\";");
      output_page($page);
+	         die();
 
     }
     else {
@@ -1806,6 +1809,7 @@ if ($mybb->get_input ('action') == 'shortsearch_read') {
       }
       eval("\$page = \"".$templates->get("shortsearch_edit")."\";");
       output_page($page);
+	      die();
 
 	}
 
@@ -2050,6 +2054,7 @@ function shortsearch_modcp() {
 
         eval("\$page = \"".$templates->get("shortsearch_modcp")."\";");
         output_page($page);
+	      die();
 
     }
 }
