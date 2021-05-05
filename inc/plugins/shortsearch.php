@@ -18,7 +18,7 @@ function shortsearch_info()
 {
 	return array(
 		"name"			=> "Kurzgesuche",
-		"description"	=> "Es handelt sich um ein Kurzgesuch-Plugin, für Gesuche, welche zwar Anschluss bieten, aber kein vollständiges Charakterkonzept besitzen und eher freier sind. Ausgewählte Gruppen können Kurzgesuche hinzufügen. Gäste und User können sich diese Gesuche reservieren und auf Wunsch werden die Gesuche auch im Profil angezeigt. Die Kategorien der Gesuche können manuell in ACP eingestellt werden. Die Gesuche können gefiltert werden auf der Hauptseite.",
+		"description"	=> "Es handelt sich um ein Kurzgesuch-Plugin für Gesuche, welche zwar Anschluss bieten, aber kein vollständiges Charakterkonzept besitzen und eher freier sind. Ausgewählte Gruppen können Kurzgesuche hinzufügen. Gäste und User können sich diese Gesuche reservieren und auf Wunsch werden die Gesuche auch im Profil angezeigt. Die Kategorien der Gesuche können manuell in ACP eingestellt werden. Die Gesuche können gefiltert werden auf der Hauptseite.",
 		"author"		=> "little.evil.genius",
 		"authorsite"	=> "https://storming-gates.de/member.php?action=profile&uid=1712",
 		"version"		=> "1.0",
@@ -101,8 +101,8 @@ function shortsearch_install()
         ),
 
         'shortsearch_playerfid' => array(
-            'title' => 'Profilfeld des Spielernamens',
-            'description' => 'Gib hier die ID des Profilfeld für die Spielernames an.',
+            'title' => 'Profilfeld vom Spielernamen',
+            'description' => 'Gib hier die ID des Profilfeld für die Spielernamen an.',
             'optionscode' => 'text',
             'value' => '4', // Default
             'disporder' => 5
@@ -110,7 +110,7 @@ function shortsearch_install()
 
         'shortsearch_teamuid' => array(
             'title' => 'Teamaccount',
-            'description' => 'Gib hier die ID des Teamaccounts an, damit bei einer Reservierung eines Gastes die PN vom Teamaccount bekommt.',
+            'description' => 'Gib hier die ID des Teamaccounts an, damit bei einer Reservierung von einem Gast die PN vom Teamaccount kommt.',
             'optionscode' => 'text',
             'value' => '1', // Default
             'disporder' => 6
@@ -661,7 +661,7 @@ function shortsearch_install()
             'title'		=> 'shortsearch_modcp_nav',
             'template'	=> $db->escape_string('<tr>
             <td class="trow1 smalltext">
-                <a href="modcp.php?action=shortsearch" class="modcp_nav_item modcp_jobliste">Kurzgesuche verwalten</a>
+                <a href="modcp.php?action=shortsearch" class="modcp_nav_item modcp_shortsearch">Kurzgesuche verwalten</a>
             </td>
         </tr>'),
             'sid'		=> '-1',
@@ -674,7 +674,7 @@ function shortsearch_install()
             'title'		=> 'shortsearch_modcp',
             'template'	=> $db->escape_string('<html>
             <head>
-                <title>{$mybb->settings[\'bbname\']} -  Alle Kurzgesuche</title>
+                <title>{$mybb->settings[\'bbname\']} -  Übersicht von allen Kurzgesuche</title>
                 {$headerinclude}
             </head>
             <body>
@@ -685,7 +685,7 @@ function shortsearch_install()
                         <td valign="top">
                             <table border="0" cellspacing="{$theme[\'borderwidth\']}" cellpadding="{$theme[\'tablespace\']}" class="tborder">
                                 <tr>
-                                    <td class="thead">Alle Kurzgesuche</td>
+                                    <td class="thead">Übersicht von allen Kurzgesuche</td>
                                 </tr>
                                 <tr>
                                     <td valign="top">
@@ -769,7 +769,7 @@ function shortsearch_install()
                             <div class="infos"  style="padding: 0 0 2px 0;"> <i class="fas fa-briefcase"></i> {$job}</div>
                         </td>
                         <td>
-                            <div class="infos"  style="padding: 0 2px 2px 0;"><i class="fas fa-heart"></i> {$relation}</div>
+                            <div class="infos"  style="padding: 0 2px 2px 0;"><i class="fas fa-heart"></i> {$relationstatus}</div>
                         </td>
                     </tr>
                     <tr>
