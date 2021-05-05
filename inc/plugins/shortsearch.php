@@ -269,7 +269,7 @@ function shortsearch_install()
             </div>	
             <div class="desc">{$text}</div>	
             <div style="display: flex;">	
-                <div class="fact"><i class="fas fa-money-bill-alt"></i> {$social}</div>		
+                <div class="fact"><i class="fas fa-heart"></i> {$relationstatus}</div>		
                 <div class="fact"><i class="fas fa-briefcase"></i> {$job}</div>		  	
             </div>    
             <div class="avatar"><i class="fas fa-camera-retro"></i> {$avatar}</div>
@@ -1673,7 +1673,7 @@ if ($mybb->get_input ('action') == 'shortsearch_read') {
                }
 
              // LÖSCHEN UND BEARBEITEN VON KURZGESUCHE
-				$option = "<a href=\"/misc.php?action=shortsearch_own&delsearch={$search['sid']}\">Löschen</a> # <a href=\"misc.php?action=shortsearch_edit&sid={$sid}\">Bearbeiten</a> # <a href=\"/misc.php?action=shortsearch_own&take={$search['sid']}\">Erledigt</a> # <a href=\"/misc.php?action=shortsearch_own&free={$search['sid']}\">Reservierung lösen</a>";
+				$option = "<a href=\"misc.php?action=shortsearch_own&delsearch={$search['sid']}\">Löschen</a> # <a href=\"misc.php?action=shortsearch_edit&sid={$sid}\">Bearbeiten</a> # <a href=\"misc.php?action=shortsearch_own&take={$search['sid']}\">Erledigt</a> # <a href=\"misc.php?action=shortsearch_own&free={$search['sid']}\">Reservierung lösen</a>";
 
 
              eval("\$shortsearch .= \"" . $templates->get("shortsearch_own_bit") . "\";");
