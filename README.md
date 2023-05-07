@@ -60,26 +60,26 @@ Veränderte Tabellen:
 - https://euerforum.de/modcp.php?action=shortsearch
 
 # Demo
-  Hauptseite der Kurzgesuche
-  <img src="https://www.bilder-hochladen.net/files/big/m4bn-76-fc96.png" />
+  Hauptseite der Kurzgesuche<p>
+  <img src="https://stormborn.at/plugins/sortsearch_uebersicht.png" />
   
-  Maske beim Hinzufügen
-  <img src="https://www.bilder-hochladen.net/files/big/m4bn-77-d5de.png" />
+  Maske beim Hinzufügen</p>
+  <img src="https://stormborn.at/plugins/sortsearch_add.png" />
   
-  Übersicht aller eigenen Kurzgesuche
-  <img src="https://www.bilder-hochladen.net/files/big/m4bn-7a-76ad.png" />
+  Übersicht aller eigenen Kurzgesuche</p>
+  <img src="https://stormborn.at/plugins/sortsearch_eigene.png" />
   
-  Kurzgesuche im Profil
-  <img src="https://www.bilder-hochladen.net/files/m4bn-7b-7b00.png" />
+  Kurzgesuche im Profil</p>
+  <img src="https://stormborn.at/plugins/sortsearch_profil.png" />
   
-  Mod-CP
-  <img src="https://www.bilder-hochladen.net/files/m4bn-79-d8f5.png" />
+  Mod-CP</p>
+  <img src="https://stormborn.at/plugins/sortsearch_modcp.png" />
   
-  Alert auf dem Index
-  <img src="https://www.bilder-hochladen.net/files/m4bn-78-3c3a.png" />
+  Alert auf dem Index</p>
+  <img src="https://stormborn.at/plugins/shortsearch_alert.png" />
   
-  Popfenster für die Gästereservierunge
-  <img src="https://www.bilder-hochladen.net/files/m4bn-7d-66c8.png" />
+  Popfenster für die Gästereservierung</p>
+  <img src="https://stormborn.at/plugins/shortsearch_gast.png" />
 
 # Danksagung
 Ein Dank geht an Katja (risuena) und Alex (Ales), welche mir bei Problem immer wieder geholfen haben. Auch ein Dank Sophie (aheartforspinach), welche über den Code nochmal geschaut hat und mir Tipps gegeben hat, wie man einiges besser löschen könnte.
