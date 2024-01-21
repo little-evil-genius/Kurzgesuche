@@ -1189,7 +1189,7 @@ function shortsearch_global(){
 
 
         $data = $db->fetch_array ($select);
-        if(isset($data['shortsearch_new']) && $data['shortsearch_new'] == '0')
+        if(isset($data['shortsearch_new']) && $data['shortsearch_new'] == '0'){
 
             eval("\$new_shortsearch = \"" . $templates->get ("shortsearch_alert") . "\";");
 
